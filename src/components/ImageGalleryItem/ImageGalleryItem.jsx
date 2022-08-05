@@ -1,25 +1,33 @@
-// import React, { Component } from 'react';
-// import style from '../../../src/styles.module.css';
+import React, { Component } from 'react';
+import style from '../../../src/styles.module.css';
 
-// class ImageGalleryItem extends Component {
-//   render() {
-//     const { hits } = this.props;
-//     console.log(hits);
-//     return (
-//       <ul>
-//         {hits &&
-//           hits.map(item => (
-//             <li key={item.id} className={style.ImageGalleryItem}>
-//               <img
-//                 className={style.ImageGalleryItemImage}
-//                 src={item.largeImageURL}
-//                 alt=""
-//               />
-//             </li>
-//           ))}
-//       </ul>
-//     );
-//   }
-// }
+class ImageGalleryItem extends Component {
+  render() {
+    const { hits, hendleClickImage, onClick } = this.props;
 
-// export default ImageGalleryItem;
+    // console.log(hits);
+
+    return (
+      <>
+        {hits &&
+          hits.map(item => (
+            <li
+              onClick={onClick}
+              key={item.id}
+              className={style.ImageGalleryItem}
+            >
+              <img
+                data-id={item.id}
+                onClick={hendleClickImage}
+                className={style.ImageGalleryItemImage}
+                src={item.largeImageURL}
+                alt=""
+              />
+            </li>
+          ))}
+      </>
+    );
+  }
+}
+
+export default ImageGalleryItem;
