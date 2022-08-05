@@ -21,7 +21,7 @@ class ImageGalleryItem extends Component {
                 onClick={hendleClickImage}
                 className={style.ImageGalleryItemImage}
                 src={item.largeImageURL}
-                alt=""
+                alt={item.tags}
               />
             </li>
           ))}

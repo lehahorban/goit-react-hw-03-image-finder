@@ -6,12 +6,12 @@ const modal = document.querySelector('#modal');
 
 class Modal extends Component {
   render() {
-    const { backDropClick, img } = this.props;
-    console.log(img.webformatURL);
+    const { backDropClick, galleryObject } = this.props;
+    console.log(galleryObject.webformatURL);
     return createPortal(
       <div onClick={backDropClick} className={style.Overlay}>
         <div className={style.Modal}>
-          <img src={img.webformatURL} alt={img.webformatURL} />
+          <img src={galleryObject.webformatURL} alt={galleryObject.tags} />
         </div>
       </div>,
       modal
