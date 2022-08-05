@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import style from '../../../src/styles.module.css';
+import PropTypes from 'prop-types';
 
 class Button extends Component {
   render() {
@@ -11,5 +12,9 @@ class Button extends Component {
     );
   }
 }
+
+Button.propTypes = {
+  incrementPage: PropTypes.func.isRequired,
+};
 
 export default Button;

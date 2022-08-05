@@ -21,21 +21,6 @@ class App extends Component {
     galleryObject: '',
     numberPage: 1,
   };
-  // componentDidMount() {
-  //   const Key = '28091582-4f46659dd3a5179a3fd2eadd3';
-  //   this.setState({ loading: true });
-  //   fetch(
-  //     `https://pixabay.com/api/?q=${this.state.galleryItem}&page=1&key=${Key}&image_type=photo&orientation=horizontal&per_page=12`
-  //   )
-  //     .then(response => response.json())
-  //     .then(gallery => gallery.hits)
-  //     .then(hits => this.setState({ hits: hits }))
-  //     .finally(() => this.setState({ loading: false }));
-  // }
-  componentDidMount() {
-    console.log('нужно закрыть модалку');
-    window.addEventListener('keydown', this.hendleKeyDown);
-  }
 
   fetchImage = () => {
     const Key = '28091582-4f46659dd3a5179a3fd2eadd3';
@@ -67,19 +52,6 @@ class App extends Component {
       console.log(error);
     }
   }
-
-  componentWillUnmount() {
-    console.log('сняли событие');
-    window.removeEventListener('keydown', this.hendleKeyDown);
-  }
-
-  hendleKeyDown = e => {
-    if (e.code === 'Escape') {
-      this.toggleModal();
-      // this.props.onClose();
-      console.log('escape');
-    }
-  };
 
   handleSearchForm = inputValue => {
     this.setState({ galleryItem: inputValue });
@@ -118,9 +90,6 @@ class App extends Component {
 
   render() {
     const hits = this.state.images;
-    console.log(hits);
-    // const fff = this.hendleClickImage();
-    // console.log(fff);
     return (
       <div className={style.App}>
         <Searchbar onSubmit={this.handleSearchForm} />

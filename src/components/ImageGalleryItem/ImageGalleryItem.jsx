@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import style from '../../../src/styles.module.css';
+import PropTypes from 'prop-types';
 
 class ImageGalleryItem extends Component {
   render() {
     const { hits, hendleClickImage, onClick } = this.props;
-
-    // console.log(hits);
 
     return (
       <>
@@ -29,5 +28,11 @@ class ImageGalleryItem extends Component {
     );
   }
 }
+
+ImageGalleryItem.propTypes = {
+  hits: PropTypes.array.isRequired,
+  hendleClickImage: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
 
 export default ImageGalleryItem;

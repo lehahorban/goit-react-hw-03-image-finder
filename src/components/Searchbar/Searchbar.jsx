@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { toast } from 'react-toastify';
 import style from '../../../src/styles.module.css';
+import PropTypes from 'prop-types';
 
 class Searchbar extends Component {
   state = {
@@ -32,7 +33,6 @@ class Searchbar extends Component {
             value={this.state.searchName}
             type="text"
             autoComplete="off"
-            // autofocus
             placeholder="Search images and photos"
           />
         </form>
@@ -40,5 +40,9 @@ class Searchbar extends Component {
     );
   }
 }
+
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export default Searchbar;
