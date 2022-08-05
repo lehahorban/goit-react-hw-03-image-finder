@@ -48,23 +48,23 @@ class App extends Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.galleryItem !== this.state.galleryItem) {
-      this.fetchImage()
-        .then(hits =>
-          this.setState(({ images }) => ({
-            images: hits,
-          }))
-        )
-        .finally(() => this.setState({ loading: false, btn: true }));
-    }
-    if (prevState.numberPage !== this.state.numberPage) {
-      this.fetchImage()
-        .then(hits =>
+    try {
+      if (prevState.galleryItem !== this.state.galleryItem) {
+        this.fetchImage().then(hits =>
+          this.setState({ images: hits, loading: false, btn: true })
+        );
+      }
+      if (prevState.numberPage !== this.state.numberPage) {
+        this.fetchImage().then(hits =>
           this.setState(({ images }) => ({
             images: [...images, ...hits],
+            loading: false,
+            btn: true,
           }))
-        )
-        .finally(() => this.setState({ loading: false, btn: true }));
+        );
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 
