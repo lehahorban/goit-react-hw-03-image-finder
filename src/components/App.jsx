@@ -15,6 +15,7 @@ class App extends Component {
     images: [],
     hits: null,
     loading: false,
+    btn: false,
     galleryItem: '',
     showModal: false,
     galleryObject: '',
@@ -36,27 +37,34 @@ class App extends Component {
     window.addEventListener('keydown', this.hendleKeyDown);
   }
 
+  fetchImage = () => {
+    const Key = '28091582-4f46659dd3a5179a3fd2eadd3';
+    this.setState({ loading: true });
+    return fetch(
+      `https://pixabay.com/api/?q=${this.state.galleryItem}&page=${this.state.numberPage}&key=${Key}&image_type=photo&orientation=horizontal&per_page=12`
+    )
+      .then(response => response.json())
+      .then(gallery => gallery.hits);
+  };
+
   componentDidUpdate(prevProps, prevState) {
-    if (
-      prevState.galleryItem !== this.state.galleryItem ||
-      prevState.numberPage !== this.state.numberPage
-    ) {
-      const Key = '28091582-4f46659dd3a5179a3fd2eadd3';
-      this.setState({ loading: true });
-      fetch(
-        `https://pixabay.com/api/?q=${this.state.galleryItem}&page=${this.state.numberPage}&key=${Key}&image_type=photo&orientation=horizontal&per_page=12`
-      )
-        .then(response => response.json())
-        .then(gallery => gallery.hits)
+    if (prevState.galleryItem !== this.state.galleryItem) {
+      this.fetchImage()
+        .then(hits =>
+          this.setState(({ images }) => ({
+            images: hits,
+          }))
+        )
+        .finally(() => this.setState({ loading: false, btn: true }));
+    }
+    if (prevState.numberPage !== this.state.numberPage) {
+      this.fetchImage()
         .then(hits =>
           this.setState(({ images }) => ({
             images: [...images, ...hits],
           }))
         )
-        .finally(() => this.setState({ loading: false }));
-      console.log(this.state.galleryItem);
-      console.log(prevState.galleryItem);
-      console.log('имя изменилось');
+        .finally(() => this.setState({ loading: false, btn: true }));
     }
   }
 
@@ -95,7 +103,7 @@ class App extends Component {
     console.log(isCardImage);
     const galleryId = +isCardImage.getAttribute('data-id');
     console.log(galleryId);
-    const hits = this.state.hits;
+    const hits = this.state.images;
     console.log(hits);
     const galleryObject = hits.find(item => item.id === galleryId);
     console.log(galleryObject);
@@ -110,7 +118,7 @@ class App extends Component {
 
   render() {
     const hits = this.state.images;
-    // console.log(hits);
+    console.log(hits);
     // const fff = this.hendleClickImage();
     // console.log(fff);
     return (
@@ -132,7 +140,7 @@ class App extends Component {
           ></Modal>
         )}
         {this.state.loading && <Loader />}
-        <Button incrementPage={this.handleIncrementPage} />
+        {this.state.btn && <Button incrementPage={this.handleIncrementPage} />}
         <ToastContainer autoClose={2000} />
       </div>
     );
