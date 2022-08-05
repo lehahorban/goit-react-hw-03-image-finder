@@ -13,7 +13,6 @@ import Modal from './Modal/Modal';
 class App extends Component {
   state = {
     images: [],
-    hits: null,
     loading: false,
     btn: false,
     galleryItem: '',
