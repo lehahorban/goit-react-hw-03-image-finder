@@ -12,6 +12,7 @@ class Searchbar extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
+
     if (this.state.searchName.trim() === '') {
       return toast('Треба написати що шукаєте');
     }

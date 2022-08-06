@@ -32,16 +32,10 @@ class App extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     try {
-      if (prevState.galleryItem !== this.state.galleryItem) {
-        this.fetchImage().then(hits =>
-          this.setState({
-            images: hits,
-            loading: false,
-            numberPage: 1,
-          })
-        );
-      }
-      if (prevState.numberPage !== this.state.numberPage) {
+      if (
+        prevState.galleryItem !== this.state.galleryItem ||
+        prevState.numberPage !== this.state.numberPage
+      ) {
         this.fetchImage().then(hits =>
           this.setState(({ images }) => ({
             images: [...images, ...hits],
@@ -55,7 +49,11 @@ class App extends Component {
   }
 
   handleSearchForm = inputValue => {
-    this.setState({ galleryItem: inputValue });
+    this.setState({
+      galleryItem: inputValue,
+      images: [],
+      numberPage: 1,
+    });
   };
 
   toggleModal = () => {
