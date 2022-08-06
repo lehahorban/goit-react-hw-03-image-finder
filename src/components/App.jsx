@@ -35,7 +35,12 @@ class App extends Component {
     try {
       if (prevState.galleryItem !== this.state.galleryItem) {
         this.fetchImage().then(hits =>
-          this.setState({ images: hits, loading: false, btn: true })
+          this.setState({
+            images: hits,
+            loading: false,
+            numberPage: 1,
+            btn: true,
+          })
         );
       }
       if (prevState.numberPage !== this.state.numberPage) {
@@ -89,6 +94,7 @@ class App extends Component {
 
   render() {
     const hits = this.state.images;
+
     return (
       <div className={style.App}>
         <Searchbar onSubmit={this.handleSearchForm} />
