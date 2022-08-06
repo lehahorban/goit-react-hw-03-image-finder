@@ -14,7 +14,6 @@ class App extends Component {
   state = {
     images: [],
     loading: false,
-    btn: false,
     galleryItem: '',
     showModal: false,
     galleryObject: '',
@@ -39,7 +38,6 @@ class App extends Component {
             images: hits,
             loading: false,
             numberPage: 1,
-            btn: true,
           })
         );
       }
@@ -48,7 +46,6 @@ class App extends Component {
           this.setState(({ images }) => ({
             images: [...images, ...hits],
             loading: false,
-            btn: true,
           }))
         );
       }
@@ -94,7 +91,8 @@ class App extends Component {
 
   render() {
     const hits = this.state.images;
-
+    console.log(hits);
+    const loadMore = hits.length > 0 && hits.length >= 12;
     return (
       <div className={style.App}>
         <Searchbar onSubmit={this.handleSearchForm} />
@@ -114,7 +112,7 @@ class App extends Component {
           ></Modal>
         )}
         {this.state.loading && <Loader />}
-        {this.state.btn && <Button incrementPage={this.handleIncrementPage} />}
+        {loadMore && <Button incrementPage={this.handleIncrementPage} />}
         <ToastContainer autoClose={2000} />
       </div>
     );

@@ -21,7 +21,7 @@ class Modal extends Component {
 }
 
 Modal.propTypes = {
-  galleryObject: PropTypes.array.isRequired,
+  galleryObject: PropTypes.object.isRequired,
   backDropClick: PropTypes.func.isRequired,
 };
 
