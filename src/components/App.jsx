@@ -22,7 +22,7 @@ class App extends Component {
 
   fetchImage = () => {
     const Key = '28091582-4f46659dd3a5179a3fd2eadd3';
-    this.setState({ loading: true });
+    this.setState({ loading: true, images: [] });
     return fetch(
       `https://pixabay.com/api/?q=${this.state.galleryItem}&page=${this.state.numberPage}&key=${Key}&image_type=photo&orientation=horizontal&per_page=12`
     )
@@ -91,7 +91,6 @@ class App extends Component {
 
   render() {
     const hits = this.state.images;
-    console.log(hits);
     const loadMore = hits.length > 0 && hits.length >= 12;
     return (
       <div className={style.App}>
